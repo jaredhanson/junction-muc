@@ -21,7 +21,7 @@ vows.describe('xUserParser').addBatch({
         var self = this;
         var pres = new Presence('hag66@shakespeare.lit/pda', 'darkcave@chat.shakespeare.lit/firstwitch', '');
         var xEl = new X('http://jabber.org/protocol/muc#user');
-        var itemEl = new Item('owner', 'moderator');
+        var itemEl = new Item('owner', 'moderator', 'crone1@shakespeare.lit/desktop', 'oldhag');
         pres.c(xEl).c(itemEl);
         pres = pres.toXML();
         
@@ -38,6 +38,12 @@ vows.describe('xUserParser').addBatch({
       },
       'should set role property' : function(err, stanza) {
         assert.equal(stanza.role, 'moderator');
+      },
+      'should set fullJID property' : function(err, stanza) {
+        assert.equal(stanza.fullJID, 'crone1@shakespeare.lit/desktop');
+      },
+      'should set newNickname property' : function(err, stanza) {
+        assert.equal(stanza.newNickname, 'oldhag');
       },
       'should not set status property' : function(err, stanza) {
         assert.isUndefined(stanza.status);
